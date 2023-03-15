@@ -1,0 +1,142 @@
+<div class="card">
+    <div class="card-body" *ngIf="contribute else noContribute">
+        <form [formGroup]="contributeForm">
+            <div class="form-group">
+                <label for="name">contribute name:</label>
+                <input type="text" class="form-control" id="name" formControlName="name" 
+                formControlName="name">
+            </div>
+            <ng-container *ngIf="contributeForm.controls?.['name']?.errors">
+                <div class="alert alert-danger" *ngIf="contributeForm.controls?.['name']?.errors?.['required']">This field is
+                    required</div>
+                <div class="alert alert-danger" *ngIf="contributeForm.controls?.['name']?.errors?.['minlength']">This field
+                    must be at least 3 characters</div>
+            </ng-container>
+
+            <div class="form-group">
+                <label for="sum">contribute sum:</label>
+                <input type="text" class="form-control" id="sum" (focus)="inputFocus()"
+                    formControlName="sum">
+            </div>
+
+            <div class="form-group">
+                <label for="priority">Task Priority</label>
+                <br>
+                <input type="radio" value="ContributeType.High" name="type" formControlName="type">High
+                <br>
+                <input type="radio" value="ContributeType.Medium" name="type" formControlName="type">Medium
+                <br>
+                <input type="radio" value="ContributeType.Low" name="type" formControlName="type">Low
+            </div>
+
+            <div [ngSwitch]="contributeForm.controls?.['type']?.value">
+                <div *ngSwitchCase="'ContributeType.High'" style="color:red">
+                    This contribute will be completed in 3 days
+                </div>
+                <div *ngSwitchCase="'ContributeType.Medium'">
+                    This contribute will be completed in 5 days
+                </div>
+                <div *ngSwitchCase="'ContributeType.Low'">
+                    This contribute will be completed in 1 week
+                </div>
+                <div *ngSwitchDefault>
+                    This contribute will be completed in 3 weeks
+                </div>
+            </div>
+
+            {{contributeForm.value | json}}
+
+
+            <button class="btn btn-primary" (click)="saveNewContribute()" [disabled]="!contributeForm.valid">
+                Save
+            </button>
+        </form>
+    </div>
+</div>
+
+<ng-template #noContribute>
+    <div class="card">No Contribute To Desplay;</div>
+</ng-template>
+
+
+
+<!-- <form [formGroup]="contributeForm" class="form">
+    <div class="all" dir="rtl">
+      <p class="title">הוספת דיווח על העמותה</p>
+      <div class="container" fxLayout fxLayout.xs="column" fxLayoutAlign="right center" fxLayoutGap="10px"
+        fxLayoutGap.xs="0" [style.marginBottom]="'-2.25em'" 
+        [style.marginTop]="'-2em'">
+  
+        <p>
+          <mat-form-field appearance="outline">
+            <mat-label>שם הישות המדינית הזרה</mat-label>
+            <input matInput required formControlName="name">
+          </mat-form-field>
+        </p>
+  
+        <p>
+          <mat-form-field appearance="outline">
+            <mat-label>סכום התרומה בש"ח</mat-label>
+            <input matInput required>
+          </mat-form-field>
+        </p>
+  
+        <mat-form-field class="try" appearance="outline">
+          <mat-label>סוג האישות המדינית הזרה</mat-label>
+          <mat-select required>
+            <mat-option *ngFor="let contributeType of contributeTypes" [value]="contributeType">
+              {{contributeType}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      
+  
+      <div class="container" dir="rtl">
+        <p>
+          <mat-form-field class="try" appearance="outline" >
+            <mat-label>יעוד התרומה</mat-label>
+            <input matInput required>
+          </mat-form-field>
+        </p>
+      </div>
+  
+      <div class="container" dir="rtl">
+        <p>
+          <mat-form-field class="try" appearance="outline" [style.marginBottom]="'-2.25em'" 
+          [style.marginTop]="'-2em'">
+            <mat-label>התנאים לתרומה</mat-label>
+            <input matInput>
+          </mat-form-field>
+        </p>
+      </div>
+  
+      <div class="container" dir="rtl" fxLayout fxLayout.xs="column" fxLayoutAlign="right center" fxLayoutGap="10px"
+        fxLayoutGap.xs="0">
+        <mat-form-field appearance="outline">
+          <mat-label>סוג המטבע</mat-label>
+          <mat-select required>
+            <mat-option *ngFor="let coinType of coinTypes" [value]= "coinType">
+              {{coinType}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+  
+        <p>
+          <mat-form-field appearance="outline">
+            <mat-label>שער ההמרה</mat-label>
+            <input matInput required>
+          </mat-form-field>
+        </p>
+      </div>
+    </div>
+  
+  
+    <div class="example-button-row">
+      <button mat-raised-button color="basic" class="btn">שמירה</button>
+      <button mat-raised-button color="basic" class="btn">ניקוי</button>
+    </div>
+  
+  </form> 
+  
+   -->

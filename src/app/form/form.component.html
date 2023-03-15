@@ -2,7 +2,8 @@
   <div class="all" dir="rtl">
     <p class="title">הוספת דיווח על העמותה</p>
     <div class="container" fxLayout fxLayout.xs="column" fxLayoutAlign="right center" fxLayoutGap="10px"
-      fxLayoutGap.xs="0">
+      fxLayoutGap.xs="0" [style.marginBottom]="'-2.25em'" 
+      [style.marginTop]="'-2em'">
 
       <p>
         <mat-form-field appearance="outline">
@@ -31,16 +32,17 @@
 
     <div class="container" dir="rtl">
       <p>
-        <mat-form-field class="try" appearance="outline">
+        <mat-form-field class="try" appearance="outline" >
           <mat-label>יעוד התרומה</mat-label>
-          <input matInput>
+          <input matInput required>
         </mat-form-field>
       </p>
     </div>
 
     <div class="container" dir="rtl">
       <p>
-        <mat-form-field class="try" appearance="outline">
+        <mat-form-field class="try" appearance="outline" [style.marginBottom]="'-2.25em'" 
+        [style.marginTop]="'-2em'">
           <mat-label>התנאים לתרומה</mat-label>
           <input matInput>
         </mat-form-field>
@@ -75,10 +77,3 @@
 
 </div> 
 
-<!-- 
-fxFlex="70"
-fxFlexOffset="15"
-fxLayout="row"
-fxLayoutAlign="center center"
-fxFlex.lt-lg="100"
-fxFlexOffset.lt-lg="0" -->

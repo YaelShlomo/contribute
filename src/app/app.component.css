@@ -13,7 +13,7 @@ mat-expansion-panel {
 }
 
 ::ng-deep .icon-arrow > .mat-expansion-indicator:after, .icon {
-	color: rgb(84, 84, 173);
+	color: rgb(94, 94, 247);
 }
 
 ::ng-deep .icon > .mat-expansion-indicator:after, .icon {

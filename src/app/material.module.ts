@@ -14,9 +14,6 @@ import {BidiModule} from '@angular/cdk/bidi';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import {MatExpansionModule} from '@angular/material/expansion';
 
-
-
-
 @NgModule({
     imports: [
         MatSidenavModule,

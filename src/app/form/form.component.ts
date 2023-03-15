@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 
-
 interface Food {
   value: string;
   viewValue: string;
 }
-
+    
 @Component({
   selector: 'app-form',
   templateUrl: './form.component.html',
