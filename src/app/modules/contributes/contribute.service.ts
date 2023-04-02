@@ -34,8 +34,8 @@ export class ContributeService {
         return this._http.get<Contribute[]>("/api/Contributes/?done=" + done);
     }
 
-    saveContributes(tasksList: Contribute[]): Observable<boolean> {
-        return this._http.post<boolean>("/api/Contributes", tasksList)
+    saveContributes(contributesList: Contribute[]): Observable<boolean> {
+        return this._http.post<boolean>("/api/Contributes", contributesList)
     }
 
     getValue(): Promise<number> {

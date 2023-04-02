@@ -4,6 +4,7 @@ import { ContributeDetailsFormComponent } from './contribute-details-form/contri
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from 'src/app/material.module';
 import { ContributeListComponent } from './contribute-list/contribute-list.component';
+import { ContributeService } from './contribute.service';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { ContributeListComponent } from './contribute-list/contribute-list.compo
     FormsModule,
     MaterialModule
   ],
+  providers: [ContributeService],
   exports: [
     ContributeDetailsFormComponent,
     ContributeListComponent

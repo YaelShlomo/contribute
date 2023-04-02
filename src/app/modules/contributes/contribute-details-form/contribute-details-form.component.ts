@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { CoinType, Contribute, ContributeType } from '../contribute.model';
+import { CoinType, Contribute, ContributeType, MyErrorStateMatcher } from '../contribute.model';
 
 @Component({
   selector: 'app-contribute-details-form',
@@ -20,6 +20,8 @@ export class ContributeDetailsFormComponent implements OnInit {
   private _contribute: Contribute;
 
   contributeForm: FormGroup;
+
+  matcher = new MyErrorStateMatcher();
 
   public get contribute(): Contribute {
     return this._contribute;

@@ -13,7 +13,14 @@ export class ContributeListComponent implements OnInit {
   contributeType = ContributeType;
   coinType = CoinType;
 
-  contributes: Contribute[];
+  contributes: Contribute[] =
+    [
+      { "id": 1, "name": "aaaa", "sum": 10, "type": ContributeType.A, "destination": "aa", "conditions": "aaa", "coinType": CoinType.Nis, "gate": 1.1 },
+      { "id": 2, "name": "bbbb", "sum": 20, "type": ContributeType.B, "destination": "bb", "conditions": "bbb", "coinType": CoinType.Dollar, "gate": 2.2 },
+      { "id": 3, "name": "cccc", "sum": 30, "type": ContributeType.C, "destination": "cc", "conditions": "ccc", "coinType": CoinType.Euro, "gate": 3.3 },
+      { "id": 4, "name": "dddd", "sum": 40, "type": ContributeType.A, "destination": "dd", "conditions": "ddd", "coinType": CoinType.Nis, "gate": 4.4 },
+    ];
+
 
   selectedContribute: Contribute;
 
@@ -35,7 +42,7 @@ export class ContributeListComponent implements OnInit {
 
   saveContributeToList(contributeToSave: Contribute) {
     console.log(JSON.stringify(contributeToSave));
-    console.log("saveTaskToList");
+    console.log("saveContributeToList");
     if (contributeToSave.id == 0) {
       contributeToSave.id = this.contributes.length + 1;
       this.contributes.push(contributeToSave);
@@ -90,7 +97,7 @@ export class ContributeListComponent implements OnInit {
   }
 
   constructor(private _contributeService: ContributeService, private _acr: ActivatedRoute) {
-  
+
   }
 
   userId?: number;

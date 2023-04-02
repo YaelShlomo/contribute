@@ -1,9 +1,4 @@
-<button routerLink="/home" class="btn btn-success">Back To Home Page</button>
 
-<br>
-
-<input type="checkbox" #chb (change)="showContributesByDone(chb.checked)">Show done tasks
-<br>
 <ul class="list-group">
     <li class="list-group-item" *ngFor="let contribute of contributes" [ngClass]="{ 'active':contribute.id==selectedContribute?.id,
                      'list-group-item-success':contribute.name=='a' }"
@@ -12,20 +7,20 @@
             <div class="col-1">{{contribute.id}}</div>
             <div class="col-3">{{contribute.name}}</div>
             <div class="col-2">
-                <button (click)="showDetails(contribute)">Show Details</button>
+                <button (click)="showDetails(contribute)">הצג פרטים</button>
             </div>
             <div class="col-2">
-                <button (click)="deleteContribute(contribute)">Delete Task</button>
+                <button (click)="deleteContribute(contribute)">מחיקת תרומה</button>
             </div>
         </div>
     </li>
 </ul>
 <br>
 
-<button class="btn btn-primary" (click)="showNewContributeDetails()">Add New Contribute</button>
+<button class="btn btn-primary" (click)="showNewContributeDetails()">הוספת תרומה חדשה</button>
 <br>
 
-<button class="btn btn-success" (click)="saveContributeToServer()">Save Contribute to server</button>
+<button class="btn btn-success" (click)="saveContributeToServer()">שמירת תרומה בשרת</button>
 <br>
 
 <!-- <task-details
@@ -41,6 +36,7 @@
 ></task-details-form-td> -->
 
 <app-contribute-details-form [contribute]="selectedContribute" (onSaveContribute)="saveContributeToList($event)"></app-contribute-details-form>
+
 <!-- <button (click)="btnClick($event)">
     Button Click With Event Object
 </button>
