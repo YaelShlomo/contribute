@@ -22,7 +22,8 @@ export class ContributeListComponent implements OnInit {
     ];
 
 
-  selectedContribute: Contribute;
+  selectedContribute1: Contribute;
+  selectedContribute2: Contribute;
 
   deleteContribute(contribute: Contribute) {
     let indexToDelete = this.contributes.indexOf(contribute);
@@ -31,13 +32,14 @@ export class ContributeListComponent implements OnInit {
 
   showNewContributeDetails() {
     console.log("showNewContributeDetails")
-    this.selectedContribute = new Contribute();
+    //console.log(this.selectedContribute1);
+    this.selectedContribute1 = new Contribute();
   }
 
   addNewContributeToList(contributeToAdd: Contribute) {
     console.log("addNewContributeToList")
     this.contributes.push(contributeToAdd);
-    //this.selectedContribute = null;
+    //this.selectedContribute1 = null;
   }
 
   saveContributeToList(contributeToSave: Contribute) {
@@ -75,7 +77,7 @@ export class ContributeListComponent implements OnInit {
   }
 
   showDetails(contribute: Contribute) {
-    this.selectedContribute = contribute;
+    this.selectedContribute2 = contribute;
   }
 
   showContributesByDone(done: boolean) {
@@ -105,6 +107,23 @@ export class ContributeListComponent implements OnInit {
   ngOnInit(): void {
   }
 
+
+  step = 0;
+
+  setStep(index: number) {
+    this.step = index;
+  }
+
+  nextStep() {
+    this.step++;
+  }
+
+  prevStep() {
+    this.step--;
+  }
+
+
+  panelOpenState = false;
 
 }
 

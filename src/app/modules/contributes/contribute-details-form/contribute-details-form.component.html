@@ -110,7 +110,7 @@
 
 
     <div class="example-button-row">
-      <button mat-raised-button color="basic" class="btn">שמירה</button>
+      <button mat-raised-button color="basic" class="btn" (click)="saveNewContribute()">שמירה</button>
       <button mat-raised-button color="basic" class="btn" type="button">ניקוי</button>
     </div>
 
@@ -118,5 +118,5 @@
 </mat-card>
 
 <ng-template #noContribute>
-  <div class="card">No Contribute To Desplay;</div>
+  <div class="card">לא נמצאו תרומות</div>
 </ng-template>

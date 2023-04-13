@@ -52,6 +52,8 @@ export class ContributeDetailsFormComponent implements OnInit {
   saveNewContribute() {
     // this.contribute?.name = this.contributeForm.controls["name"].value;
     // this.contribute?.sum = this.contributeForm.controls["sum"].value; 
+    console.log("saveNewContribute");
+    console.log(this.contribute);
     this.contribute = this.contributeForm.value;
     this.onSaveContribute.emit(this._contribute);
   }

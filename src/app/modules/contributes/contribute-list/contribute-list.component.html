@@ -1,21 +1,42 @@
 
-<ul class="list-group">
-    <li class="list-group-item" *ngFor="let contribute of contributes" [ngClass]="{ 'active':contribute.id==selectedContribute?.id,
+<!-- <ul class="list-group">
+    <li class="list-group-item" *ngFor="let contribute of contributes" [ngClass]="{ 'active':contribute.id==selectedContribute2?.id,
                      'list-group-item-success':contribute.name=='a' }"
         [class.list-group-item-danger]="contribute.type==contributeType.A">
         <div class="row">
             <div class="col-1">{{contribute.id}}</div>
             <div class="col-3">{{contribute.name}}</div>
             <div class="col-2">
-                <button (click)="showDetails(contribute)">הצג פרטים</button>
+                <button (click)="showDetails(contribute)">edit</button>
             </div>
             <div class="col-2">
-                <button (click)="deleteContribute(contribute)">מחיקת תרומה</button>
+                <button (click)="deleteContribute(contribute)">sweept_delete </button>
             </div>
         </div>
     </li>
 </ul>
-<br>
+<br> -->
+
+<div class="form">
+    <mat-accordion class="example-headers-align" dir="rtl">
+      <mat-expansion-panel class="aaa" [expanded]="step === 0" (opened)="setStep(0)" *ngFor="let contribute of contributes" >
+        <mat-expansion-panel-header class="icon-arrow">
+          <mat-panel-title>
+            {{contribute.id}}          
+        </mat-panel-title>
+          <mat-panel-description>
+            {{contribute.name}}          
+        </mat-panel-description>
+          <mat-icon class="icon" (click)="showDetails(contribute)">edit</mat-icon>
+          <mat-icon class="icon" (click)="deleteContribute(contribute)">delete_sweep</mat-icon>
+        </mat-expansion-panel-header>
+        <app-contribute-details-form [contribute]="selectedContribute2" (onSaveContribute)="saveContributeToList($event)"></app-contribute-details-form>
+    </mat-expansion-panel>
+  
+    </mat-accordion>
+  </div>
+
+  <br>
 
 <button class="btn btn-primary" (click)="showNewContributeDetails()">הוספת תרומה חדשה</button>
 <br>
@@ -35,7 +56,7 @@
     (onFirstFocus)="showAdv()"
 ></task-details-form-td> -->
 
-<app-contribute-details-form [contribute]="selectedContribute" (onSaveContribute)="saveContributeToList($event)"></app-contribute-details-form>
+<app-contribute-details-form [contribute]="selectedContribute1" (onSaveContribute)="saveContributeToList($event)"></app-contribute-details-form>
 
 <!-- <button (click)="btnClick($event)">
     Button Click With Event Object

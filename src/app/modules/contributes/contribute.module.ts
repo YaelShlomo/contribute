@@ -10,7 +10,7 @@ import { ContributeService } from './contribute.service';
   declarations: [
     ContributeDetailsFormComponent,
     ContributeListComponent
-  ],
+    ],
   imports: [
     CommonModule,
     ReactiveFormsModule,
