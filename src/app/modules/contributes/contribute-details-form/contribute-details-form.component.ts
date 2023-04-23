@@ -17,33 +17,57 @@ export class ContributeDetailsFormComponent implements OnInit {
 
   entityType = ContributeType;
 
-  private _contribute: Contribute;
+  private _contribute: Contribute | null;
 
   contributeForm: FormGroup;
 
   matcher = new MyErrorStateMatcher();
 
-  public get contribute(): Contribute {
-    return this._contribute;
+  public get contribute(): Contribute | null {
+    return this._contribute!;
   }
 
   @Input()
-  public set contribute(value: Contribute) {
+  public set contribute(value: Contribute | null) {
     if (value != null) {
       this._contribute = value;
       if (this._contribute != undefined) {
         this.contributeForm = new FormGroup({
-          "id": new FormControl(this.contribute.id),
-          "name": new FormControl(this.contribute.name, [Validators.required, Validators.minLength(3)]),
+          "id": new FormControl(this._contribute.id),
+          "name": new FormControl(this._contribute.name, [Validators.required, Validators.minLength(3)]),
           "sum": new FormControl(this._contribute.sum, Validators.required),
-          "type": new FormControl(this.contribute.type, Validators.required),
-          "destination": new FormControl(this.contribute.destination, Validators.required),
-          "conditions": new FormControl(this.contribute.conditions),
-          "coinType": new FormControl(this.contribute.coinType, Validators.required),
-          "gate": new FormControl(this.contribute.gate, Validators.required)
+          "contributeType": new FormControl(this._contribute.contributeType, Validators.required),
+          "destination": new FormControl(this._contribute.destination, Validators.required),
+          "conditions": new FormControl(this._contribute.conditions),
+          "coinType": new FormControl(this._contribute.coinType, Validators.required),
+          "gate": new FormControl(this._contribute.gate, Validators.required)
         });
       }
     }
+  }
+
+  getErrorMessage(field: string): string {
+    if (this.contributeForm.controls?.[field]?.errors?.['required']) {
+      return 'זהו שדה חובה';
+    }
+    if (field == 'name' && this.contributeForm.controls?.['name']?.errors?.['minlength']) {
+      return "שדה זה חייב להכל לפחות 3 תווים";
+    }
+    return '';
+  }
+
+  clearContribute() {
+    if (this._contribute)
+    this.contributeForm = new FormGroup({
+      "id": new FormControl(this._contribute.id),
+      "name": new FormControl('', [Validators.required, Validators.minLength(3)]),
+      "sum": new FormControl('', Validators.required),
+      "contributeType": new FormControl('', Validators.required),
+      "destination": new FormControl('', Validators.required),
+      "conditions": new FormControl(''),
+      "coinType": new FormControl('', Validators.required),
+      "gate": new FormControl('', Validators.required)
+    });
   }
 
   @Output()
@@ -51,11 +75,14 @@ export class ContributeDetailsFormComponent implements OnInit {
 
   saveNewContribute() {
     // this.contribute?.name = this.contributeForm.controls["name"].value;
-    // this.contribute?.sum = this.contributeForm.controls["sum"].value; 
+    // this.contribute?.sum = this.contributeForm.controls["sum"].value;
+    if (this.contributeForm.valid) {
+      console.log("this.contributeForm.valid");
+      this.contribute = this.contributeForm.value;
+      this.onSaveContribute.emit(this._contribute);
+      this._contribute = null
+    } 
     console.log("saveNewContribute");
-    console.log(this.contribute);
-    this.contribute = this.contributeForm.value;
-    this.onSaveContribute.emit(this._contribute);
   }
 
   @Output()

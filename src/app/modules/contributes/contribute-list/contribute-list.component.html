@@ -18,10 +18,10 @@
 <br> -->
 
 <div class="form">
-    <mat-accordion class="example-headers-align" dir="rtl">
-      <mat-expansion-panel class="aaa" [expanded]="step === 0" (opened)="setStep(0)" *ngFor="let contribute of contributes" >
+    <mat-accordion class="example-headers-align" dir="rtl" #firstAccordion>
+      <mat-expansion-panel (click)="showDetails(contribute)" [expanded]="step === 0" (opened)="setStep(0)" *ngFor="let contribute of contributes" >
         <mat-expansion-panel-header class="icon-arrow">
-          <mat-panel-title>
+        <mat-panel-title>
             {{contribute.id}}          
         </mat-panel-title>
           <mat-panel-description>

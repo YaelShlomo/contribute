@@ -5,7 +5,7 @@ export class Contribute {
     id: Number;
     name: string;
     sum: Number;
-    type: ContributeType;
+    contributeType: ContributeType;
     destination: string;
     conditions?: string;
     coinType: CoinType;

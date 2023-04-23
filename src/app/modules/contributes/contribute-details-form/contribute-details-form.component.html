@@ -50,26 +50,29 @@
         <mat-form-field appearance="outline" fxFlex="25%">
           <mat-label>שם הישות המדינית הזרה</mat-label>
           <input matInput formControlName="name" [errorStateMatcher]="matcher">
-          <mat-error *ngIf="contributeForm.hasError('name') && !contributeForm.hasError('required')">
-            Please enter a valid name
-          </mat-error>
-          <mat-error *ngIf="contributeForm.hasError('required')">
-            Email is <strong>required</strong>
+          <mat-error *ngIf="contributeForm.controls?.['name']?.errors">
+            {{getErrorMessage("name")}}
           </mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="outline" fxFlex="25%">
           <mat-label>סכום התרומה בש"ח</mat-label>
           <input matInput formControlName="sum">
+          <mat-error *ngIf="contributeForm.controls?.['sum']?.errors">
+            {{getErrorMessage("sum")}}
+          </mat-error>
         </mat-form-field>
         
-        <mat-form-field appearance="outline" fxFlex="50%">
+        <mat-form-field appearance="outline" fxFlex="50%" >
           <mat-label>סוג האישות המדינית הזרה</mat-label>
-          <mat-select formControlName="type">
+          <mat-select formControlName="contributeType">
             <mat-option *ngFor="let contributeType of contributeTypes" [value]="contributeType">
               {{contributeType}}
             </mat-option>
           </mat-select>
+          <mat-error *ngIf="contributeForm.controls?.['contributeType']?.errors">
+            {{getErrorMessage("contributeType")}}
+          </mat-error>
         </mat-form-field>
       </div>
 
@@ -77,6 +80,9 @@
           <mat-form-field class="try" appearance="outline">
             <mat-label>יעוד התרומה</mat-label>
             <input matInput formControlName="destination">
+            <mat-error *ngIf="contributeForm.controls?.['destination']?.errors">
+              {{getErrorMessage("destination")}}
+            </mat-error>
           </mat-form-field>
       </div>
 
@@ -98,11 +104,17 @@
               {{coinType}}
             </mat-option>
           </mat-select>
+          <mat-error *ngIf="contributeForm.controls?.['coinType']?.errors">
+            {{getErrorMessage("coinType")}}
+          </mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="outline" fxFlex="25%">
           <mat-label>שער ההמרה</mat-label>
           <input matInput formControlName="gate">
+          <mat-error *ngIf="contributeForm.controls?.['gate']?.errors">
+            {{getErrorMessage("gate")}}
+          </mat-error>
         </mat-form-field>
 
       </div>
@@ -111,7 +123,7 @@
 
     <div class="example-button-row">
       <button mat-raised-button color="basic" class="btn" (click)="saveNewContribute()">שמירה</button>
-      <button mat-raised-button color="basic" class="btn" type="button">ניקוי</button>
+      <button mat-raised-button color="basic" class="btn" type="button" (click)="clearContribute()">ניקוי</button>
     </div>
 
   </form>

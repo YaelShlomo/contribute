@@ -4,10 +4,10 @@ import { Observable } from "rxjs";
 import { CoinType, Contribute, ContributeType } from "./contribute.model";
 
 const CONTRIBUTES = [
-    { "id":1, "name":"aaaa", "sum":10, "type":ContributeType.A, "destination":"aa", "conditions":"aaa", "coinType":CoinType.Nis, "gate":1.1  },
-    { "id":2, "name":"bbbb", "sum":20, "type":ContributeType.B, "destination":"bb", "conditions":"bbb", "coinType":CoinType.Dollar, "gate":2.2  },
-    { "id":3, "name":"cccc", "sum":30, "type":ContributeType.C, "destination":"cc", "conditions":"ccc", "coinType":CoinType.Euro, "gate":3.3  },
-    { "id":4, "name":"dddd", "sum":40, "type":ContributeType.A, "destination":"dd", "conditions":"ddd", "coinType":CoinType.Nis, "gate":4.4  },
+    { "id":1, "name":"aaaa", "sum":10, "contributeType":ContributeType.A, "destination":"aa", "conditions":"aaa", "coinType":CoinType.Nis, "gate":1.1  },
+    { "id":2, "name":"bbbb", "sum":20, "contributeType":ContributeType.B, "destination":"bb", "conditions":"bbb", "coinType":CoinType.Dollar, "gate":2.2  },
+    { "id":3, "name":"cccc", "sum":30, "contributeType":ContributeType.C, "destination":"cc", "conditions":"ccc", "coinType":CoinType.Euro, "gate":3.3  },
+    { "id":4, "name":"dddd", "sum":40, "contributeType":ContributeType.A, "destination":"dd", "conditions":"ddd", "coinType":CoinType.Nis, "gate":4.4  },
 ]
 
 @Injectable()

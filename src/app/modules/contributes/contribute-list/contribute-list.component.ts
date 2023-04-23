@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatAccordion } from '@angular/material/expansion';
 import { ActivatedRoute } from '@angular/router';
 import { CoinType, Contribute, ContributeType } from '../contribute.model';
 import { ContributeService } from '../contribute.service';
@@ -15,11 +16,14 @@ export class ContributeListComponent implements OnInit {
 
   contributes: Contribute[] =
     [
-      { "id": 1, "name": "aaaa", "sum": 10, "type": ContributeType.A, "destination": "aa", "conditions": "aaa", "coinType": CoinType.Nis, "gate": 1.1 },
-      { "id": 2, "name": "bbbb", "sum": 20, "type": ContributeType.B, "destination": "bb", "conditions": "bbb", "coinType": CoinType.Dollar, "gate": 2.2 },
-      { "id": 3, "name": "cccc", "sum": 30, "type": ContributeType.C, "destination": "cc", "conditions": "ccc", "coinType": CoinType.Euro, "gate": 3.3 },
-      { "id": 4, "name": "dddd", "sum": 40, "type": ContributeType.A, "destination": "dd", "conditions": "ddd", "coinType": CoinType.Nis, "gate": 4.4 },
+      { "id": 1, "name": "aaaa", "sum": 10, "contributeType": ContributeType.A, "destination": "aa", "conditions": "aaa", "coinType": CoinType.Nis, "gate": 1.1 },
+      { "id": 2, "name": "bbbb", "sum": 20, "contributeType": ContributeType.B, "destination": "bb", "conditions": "bbb", "coinType": CoinType.Dollar, "gate": 2.2 },
+      { "id": 3, "name": "cccc", "sum": 30, "contributeType": ContributeType.C, "destination": "cc", "conditions": "ccc", "coinType": CoinType.Euro, "gate": 3.3 },
+      { "id": 4, "name": "dddd", "sum": 40, "contributeType": ContributeType.A, "destination": "dd", "conditions": "ddd", "coinType": CoinType.Nis, "gate": 4.4 },
     ];
+
+  @ViewChild('firstAccordion') firstAccordion: MatAccordion;
+
 
 
   selectedContribute1: Contribute;
@@ -54,6 +58,8 @@ export class ContributeListComponent implements OnInit {
       let index = this.contributes.indexOf(contributeToUpdate);
       this.contributes[index] = contributeToSave;
     }
+    this.firstAccordion.closeAll();
+
     //this.selectedContribute.name="";
     //this.selectedContribute.description="";
     //this.selectedContribute.id=0;

@@ -65,19 +65,19 @@ mat-form-field.ng-touched.ng-valid {
 }*/
 
 /* default and hover color */
-::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
+/* ::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
     color: red;
-}
+} */
 
 /* focused color */
-::ng-deep .mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick {
+/* ::ng-deep .mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick {
     color: green;
-}
+} */
 
 /* floating label color */
-::ng-deep .mat-form-field-appearance-outline.mat-focused .mat-form-field-label { 
+/* ::ng-deep .mat-form-field-appearance-outline.mat-focused .mat-form-field-label { 
     color: green; 
-}
+} */
 
 
 
