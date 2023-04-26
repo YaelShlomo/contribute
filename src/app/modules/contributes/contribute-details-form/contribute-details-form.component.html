@@ -1,60 +1,18 @@
-<!-- <div class="card">
-  <div class="card-body" *ngIf="contribute else noContribute">
-    <form [formGroup]="contributeForm">
-      <div class="form-group">
-        <label for="name">שם הישות המדינית הזרה</label>
-        <input type="text" class="form-control" id="name" formControlName="name" formControlName="name">
-      </div>
-      <div class="alert alert-danger" *ngIf="contributeForm.controls?.['name']?.errors?.['']">שדה חובה</div>
-
-      <div class="form-group">
-        <label for="sum">סכום התרומה בש"ח</label>
-        <input type="text" class="form-control" id="sum" (focus)="inputFocus()" formControlName="sum">
-      </div>
-      <div class="alert alert-danger" *ngIf="contributeForm.controls?.['sum']?.errors?.['']">שדה חובה</div>
-
-
-      <div class="form-group">
-        <label for="contributeType">סוג הישות המדינית הזרה</label>
-        <br>
-        <input type="radio" value="ContributeType.A" name="type" formControlName="type">A
-        <br>
-        <input type="radio" value="ContributeType.B" name="type" formControlName="type">B
-        <br>
-        <input type="radio" value="ContributeType.C" name="type" formControlName="type">C
-      </div>
-
-      {{contributeForm.value | json}}
-
-
-      <button class="btn btn-primary" (click)="saveNewContribute()"> -->
-        <!-- [disabled]="!contributeForm.valid" -->
-        <!-- Save
-      </button>
-    </form>
-  </div>
-</div>
-
-<ng-template #noContribute>
-  <div class="card">No Contribute To Desplay;</div>
-</ng-template> -->
-
-
 <mat-card *ngIf="contribute else noContribute">
   <form [formGroup]="contributeForm">
-    <!-- class="form" -->
     <div class="all" dir="rtl">
       <p class="title">הוספת דיווח על העמותה</p>
-      <div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutGap="10px" fxLayoutGap.xs="0">
-        <!-- fxLayoutAlign="space-between center" fxLayoutGap="10px" -->
+      <div fxLayout.xs="column" fxLayoutGap="10px" fxLayoutGap.xs="0" #e>
+        <!-- [ngClass]="{'flx1':this.isDisable, 'flx':!this.isDisable}" 
+        {{e.className}}
+        {{this.isDisable}} -->
         <mat-form-field appearance="outline" fxFlex="25%">
           <mat-label>שם הישות המדינית הזרה</mat-label>
-          <input matInput formControlName="name" [errorStateMatcher]="matcher">
+          <input matInput formControlName="name">
           <mat-error *ngIf="contributeForm.controls?.['name']?.errors">
             {{getErrorMessage("name")}}
           </mat-error>
         </mat-form-field>
-
         <mat-form-field appearance="outline" fxFlex="25%">
           <mat-label>סכום התרומה בש"ח</mat-label>
           <input matInput formControlName="sum">
@@ -62,8 +20,7 @@
             {{getErrorMessage("sum")}}
           </mat-error>
         </mat-form-field>
-        
-        <mat-form-field appearance="outline" fxFlex="50%" >
+        <mat-form-field appearance="outline" fxFlex="50%">
           <mat-label>סוג האישות המדינית הזרה</mat-label>
           <mat-select formControlName="contributeType">
             <mat-option *ngFor="let contributeType of contributeTypes" [value]="contributeType">
@@ -76,27 +33,24 @@
         </mat-form-field>
       </div>
 
-      <div class="container" dir="rtl">
-          <mat-form-field class="try" appearance="outline">
-            <mat-label>יעוד התרומה</mat-label>
-            <input matInput formControlName="destination">
-            <mat-error *ngIf="contributeForm.controls?.['destination']?.errors">
-              {{getErrorMessage("destination")}}
-            </mat-error>
-          </mat-form-field>
+      <div dir="rtl">
+        <mat-form-field class="try" appearance="outline">
+          <mat-label>יעוד התרומה</mat-label>
+          <input matInput formControlName="destination">
+          <mat-error *ngIf="contributeForm.controls?.['destination']?.errors">
+            {{getErrorMessage("destination")}}
+          </mat-error>
+        </mat-form-field>
       </div>
 
-      <div class="container" dir="rtl">
-          <mat-form-field class="try" appearance="outline">
-            <!-- [style.marginBottom]="'-2.25em'" 
-          [style.marginTop]="'-2em'" -->
-            <mat-label>התנאים לתרומה</mat-label>
-            <input matInput formControlName="conditions">
-          </mat-form-field>
+      <div dir="rtl">
+        <mat-form-field class="try" appearance="outline">
+          <mat-label>התנאים לתרומה</mat-label>
+          <input matInput formControlName="conditions">
+        </mat-form-field>
       </div>
 
-      <div class="container" dir="rtl" fxLayout="row" fxLayout.xs="column" fxLayoutGap="10px" fxLayoutGap.xs="0">
-        <!-- fxLayoutAlign="right center" fxLayoutGap="10px" -->
+      <div dir="rtl" fxLayout="row" fxLayout.xs="column" fxLayoutGap="10px" fxLayoutGap.xs="0">
         <mat-form-field appearance="outline" fxFlex="25%">
           <mat-label>סוג המטבע</mat-label>
           <mat-select formControlName="coinType">
@@ -108,7 +62,6 @@
             {{getErrorMessage("coinType")}}
           </mat-error>
         </mat-form-field>
-
         <mat-form-field appearance="outline" fxFlex="25%">
           <mat-label>שער ההמרה</mat-label>
           <input matInput formControlName="gate">
@@ -116,16 +69,15 @@
             {{getErrorMessage("gate")}}
           </mat-error>
         </mat-form-field>
-
       </div>
     </div>
 
-
     <div class="example-button-row">
-      <button mat-raised-button color="basic" class="btn" (click)="saveNewContribute()">שמירה</button>
-      <button mat-raised-button color="basic" class="btn" type="button" (click)="clearContribute()">ניקוי</button>
+      <button mat-raised-button color="primary" class="btn" (click)="saveNewContribute()"
+        *ngIf="!this.isDisable">שמירה</button>
+      <button mat-raised-button color="primary" class="btn" type="button" (click)="clearContribute()"
+        *ngIf="!this.isDisable">ניקוי</button>
     </div>
-
   </form>
 </mat-card>
 

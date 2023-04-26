@@ -1,5 +1,5 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatAccordion } from '@angular/material/expansion';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { MatAccordion, MatExpansionPanel } from '@angular/material/expansion';
 import { ActivatedRoute } from '@angular/router';
 import { CoinType, Contribute, ContributeType } from '../contribute.model';
 import { ContributeService } from '../contribute.service';
@@ -22,12 +22,9 @@ export class ContributeListComponent implements OnInit {
       { "id": 4, "name": "dddd", "sum": 40, "contributeType": ContributeType.A, "destination": "dd", "conditions": "ddd", "coinType": CoinType.Nis, "gate": 4.4 },
     ];
 
-  @ViewChild('firstAccordion') firstAccordion: MatAccordion;
-
-
-
   selectedContribute1: Contribute;
   selectedContribute2: Contribute;
+  isDisable: boolean;
 
   deleteContribute(contribute: Contribute) {
     let indexToDelete = this.contributes.indexOf(contribute);
@@ -58,8 +55,6 @@ export class ContributeListComponent implements OnInit {
       let index = this.contributes.indexOf(contributeToUpdate);
       this.contributes[index] = contributeToSave;
     }
-    this.firstAccordion.closeAll();
-
     //this.selectedContribute.name="";
     //this.selectedContribute.description="";
     //this.selectedContribute.id=0;
@@ -84,6 +79,12 @@ export class ContributeListComponent implements OnInit {
 
   showDetails(contribute: Contribute) {
     this.selectedContribute2 = contribute;
+    this.isDisable = true;
+  }
+
+  editDetails(contribute: Contribute) {
+    this.selectedContribute2 = contribute;
+    this.isDisable = false;
   }
 
   showContributesByDone(done: boolean) {
@@ -113,23 +114,21 @@ export class ContributeListComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  expandPanel(matExpansionPanel: MatExpansionPanel, event: any) {
+    event.stopPropagation();
+    console.log(event.target.tagName);
 
-  step = 0;
-
-  setStep(index: number) {
-    this.step = index;
+    if (!this._isExpansionIndicator(event.target)) {
+      matExpansionPanel.close();
+    }
   }
 
-  nextStep() {
-    this.step++;
+  private _isExpansionIndicator(target: EventTarget | any): boolean {
+    const expansionIndicatorClass = "mat-expansion-indicator";
+    return (
+      target.classList && target.classList.contains(expansionIndicatorClass)
+    );
   }
-
-  prevStep() {
-    this.step--;
-  }
-
-
-  panelOpenState = false;
 
 }
 

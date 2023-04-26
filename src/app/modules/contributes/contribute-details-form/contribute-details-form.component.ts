@@ -15,13 +15,35 @@ export class ContributeDetailsFormComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  private _isDisable: boolean;
+
+  public get isDisable(): boolean {
+    return this._isDisable;
+  }
+
+  @Input()
+  public set isDisable(value: boolean) {
+    this._isDisable = value;
+
+    if (this._contribute != undefined) {
+      this.contributeForm = new FormGroup({
+        "id": new FormControl(this._contribute.id),
+        "name": new FormControl({ value: this._contribute.name, disabled: this._isDisable }, [Validators.required, Validators.minLength(3)]),
+        "sum": new FormControl({ value: this._contribute.sum, disabled: this._isDisable }, Validators.required),
+        "contributeType": new FormControl({ value: this._contribute.contributeType, disabled: this._isDisable }, Validators.required),
+        "destination": new FormControl({ value: this._contribute.destination, disabled: this._isDisable }, Validators.required),
+        "conditions": new FormControl({ value: this._contribute.conditions, disabled: this._isDisable }),
+        "coinType": new FormControl({ value: this._contribute.coinType, disabled: this._isDisable }, Validators.required),
+        "gate": new FormControl({ value: this._contribute.gate, disabled: this._isDisable }, Validators.required)
+      });
+    }
+  }
+
   entityType = ContributeType;
 
   private _contribute: Contribute | null;
 
   contributeForm: FormGroup;
-
-  matcher = new MyErrorStateMatcher();
 
   public get contribute(): Contribute | null {
     return this._contribute!;
@@ -44,6 +66,12 @@ export class ContributeDetailsFormComponent implements OnInit {
         });
       }
     }
+    // if (this._isDisable) {
+    //   this.contributeForm.disable()
+    // }
+    // else {
+    //   this.contributeForm.enable()
+    // }
   }
 
   getErrorMessage(field: string): string {
