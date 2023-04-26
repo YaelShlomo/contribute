@@ -119,7 +119,7 @@ export class ContributeListComponent implements OnInit {
     console.log(event.target.tagName);
 
     if (!this._isExpansionIndicator(event.target)) {
-      matExpansionPanel.close();
+      matExpansionPanel.open();
     }
   }
 

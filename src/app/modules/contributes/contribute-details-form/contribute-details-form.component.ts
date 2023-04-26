@@ -24,7 +24,6 @@ export class ContributeDetailsFormComponent implements OnInit {
   @Input()
   public set isDisable(value: boolean) {
     this._isDisable = value;
-
     if (this._contribute != undefined) {
       this.contributeForm = new FormGroup({
         "id": new FormControl(this._contribute.id),
@@ -36,6 +35,8 @@ export class ContributeDetailsFormComponent implements OnInit {
         "coinType": new FormControl({ value: this._contribute.coinType, disabled: this._isDisable }, Validators.required),
         "gate": new FormControl({ value: this._contribute.gate, disabled: this._isDisable }, Validators.required)
       });
+      console.log(this.contributeForm.controls?.['name'].value)
+
     }
   }
 

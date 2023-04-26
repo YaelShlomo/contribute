@@ -23,14 +23,21 @@
 	background-color: #0d6efd;
 }  */
 
-.flx {
+.fxLayoutRow {
     flex-direction: row;
     box-sizing: border-box;
     display: flex;
 }
 
-.flx1 {
+.fxLayoutCol {
     flex-direction: column;
     box-sizing: border-box;
     display: flex;
 }
+
+.marginLetf{
+    margin-left: 10px;
+}
+
+
+

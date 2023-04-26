@@ -1,19 +1,16 @@
 <mat-card *ngIf="contribute else noContribute">
   <form [formGroup]="contributeForm">
     <div class="all" dir="rtl">
-      <p class="title">הוספת דיווח על העמותה</p>
-      <div fxLayout.xs="column" fxLayoutGap="10px" fxLayoutGap.xs="0" #e>
-        <!-- [ngClass]="{'flx1':this.isDisable, 'flx':!this.isDisable}" 
-        {{e.className}}
-        {{this.isDisable}} -->
-        <mat-form-field appearance="outline" fxFlex="25%">
+      <p class="title" *ngIf="contribute.id == 0">הוספת דיווח על העמותה</p>   
+      <div [ngClass]="{'fxLayoutRow':contribute.id == 0, 'fxLayoutCol':contribute.id !== 0}" fxLayout.xs="column" fxLayoutGap.xs="0" #p>
+        <mat-form-field appearance="outline" fxFlex="25%" [ngClass]="{'marginLetf':contribute.id == 0}">
           <mat-label>שם הישות המדינית הזרה</mat-label>
           <input matInput formControlName="name">
           <mat-error *ngIf="contributeForm.controls?.['name']?.errors">
             {{getErrorMessage("name")}}
           </mat-error>
         </mat-form-field>
-        <mat-form-field appearance="outline" fxFlex="25%">
+        <mat-form-field appearance="outline" fxFlex="25%" [ngClass]="{'marginLetf':contribute.id == 0}">
           <mat-label>סכום התרומה בש"ח</mat-label>
           <input matInput formControlName="sum">
           <mat-error *ngIf="contributeForm.controls?.['sum']?.errors">
@@ -50,7 +47,7 @@
         </mat-form-field>
       </div>
 
-      <div dir="rtl" fxLayout="row" fxLayout.xs="column" fxLayoutGap="10px" fxLayoutGap.xs="0">
+      <div dir="rtl" [ngClass]="{'fxLayoutRow':contribute.id == 0, 'fxLayoutCol':contribute.id !== 0}" fxLayout.xs="column" fxLayoutGap="10px" fxLayoutGap.xs="0">
         <mat-form-field appearance="outline" fxFlex="25%">
           <mat-label>סוג המטבע</mat-label>
           <mat-select formControlName="coinType">
@@ -76,7 +73,7 @@
       <button mat-raised-button color="primary" class="btn" (click)="saveNewContribute()"
         *ngIf="!this.isDisable">שמירה</button>
       <button mat-raised-button color="primary" class="btn" type="button" (click)="clearContribute()"
-        *ngIf="!this.isDisable">ניקוי</button>
+        *ngIf="!this.isDisable" [disabled]="!contributeForm.dirty && !contributeForm.valid">ניקוי</button>
     </div>
   </form>
 </mat-card>
