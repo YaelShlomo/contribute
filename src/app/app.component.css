@@ -1,18 +1,11 @@
 
-/* 
-::ng-deep .mat-expansion-panel-header {
-	background-color: #e2f8fb;
-} */
-
-.form {
-	width: 50%;
-	align-items: right;
-	/* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); */
+.pageContainer  {
+	max-width: 700px;
 	margin: auto;
-	padding: 10px;
-	border-radius: 5px;
-	margin-top: 50px;
+	margin-top: 20px;
 }
+
+
 
 
 

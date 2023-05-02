@@ -1,9 +1,9 @@
 
-<div class="form" dir="rtl">
+<div class="form" dir="rtl" *ngIf="contributes else noContribute">
   <mat-accordion>
-    <mat-expansion-panel  [expanded]=false
+    <mat-expansion-panel [expanded]=false
       *ngFor="let contribute of contributes" #matExpansionPanel1 hideToggle>
-      <mat-expansion-panel-header class="icon-arrow" class="disabled-pointer">
+      <mat-expansion-panel-header class="disabled-pointer">
         <mat-panel-title>
           {{contribute.id}}
         </mat-panel-title>
@@ -12,6 +12,7 @@
         </mat-panel-description>
         <mat-icon class="icon" (click)="editDetails(contribute)" class="enabled-pointer">edit</mat-icon>
         <mat-icon class="icon" (click)="deleteContribute(contribute)" class="enabled-pointer">delete_outline</mat-icon>
+        <!-- (click)="openDialog()" -->
         <h4 class="pipe">|</h4>
         <mat-icon class="icon" color="primary" (click)="showDetails(contribute)" class="enabled-pointer toggle">keyboard_arrow_down</mat-icon>
       </mat-expansion-panel-header>
@@ -23,11 +24,12 @@
 </div>
 
 <br>
-<button class="btn btn-primary" (click)="showNewContributeDetails()">הוספת תרומה חדשה</button>
-<br>
-
-<button class="btn btn-success" (click)="saveContributeToServer()">שמירת תרומה בשרת</button>
+<button mat-raised-button color="primary" class="btn-primary" (click)="showNewContributeDetails()">הוספת תרומה </button>
 <br>
 
 <app-contribute-details-form [contribute]="selectedContribute1" (onSaveContribute)="saveContributeToList($event)">
 </app-contribute-details-form>
+
+<ng-template #noContribute>
+  <div class="card">לא נמצאו תרומות</div>
+</ng-template>

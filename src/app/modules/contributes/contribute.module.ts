@@ -5,11 +5,13 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from 'src/app/material.module';
 import { ContributeListComponent } from './contribute-list/contribute-list.component';
 import { ContributeService } from './contribute.service';
+import { DeleteContributeModalComponent } from './delete-contribute-modal/delete-contribute-modal.component';
 
 @NgModule({
   declarations: [
     ContributeDetailsFormComponent,
-    ContributeListComponent
+    ContributeListComponent,
+    DeleteContributeModalComponent
     ],
   imports: [
     CommonModule,

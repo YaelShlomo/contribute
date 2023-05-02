@@ -1,13 +1,15 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
-import { MatAccordion, MatExpansionPanel } from '@angular/material/expansion';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { MatExpansionPanel } from '@angular/material/expansion';
 import { ActivatedRoute } from '@angular/router';
 import { CoinType, Contribute, ContributeType } from '../contribute.model';
 import { ContributeService } from '../contribute.service';
-
+import { DeleteContributeModalComponent } from '../delete-contribute-modal/delete-contribute-modal.component';
 @Component({
   selector: 'app-contribute-list',
   templateUrl: './contribute-list.component.html',
-  styleUrls: ['./contribute-list.component.css']
+  styleUrls: ['./contribute-list.component.css'],
+  encapsulation: ViewEncapsulation.None
 })
 export class ContributeListComponent implements OnInit {
 
@@ -23,7 +25,7 @@ export class ContributeListComponent implements OnInit {
     ];
 
   selectedContribute1: Contribute;
-  selectedContribute2: Contribute;
+  selectedContribute2: Contribute | null;
   isDisable: boolean;
 
   deleteContribute(contribute: Contribute) {
@@ -32,20 +34,16 @@ export class ContributeListComponent implements OnInit {
   }
 
   showNewContributeDetails() {
-    console.log("showNewContributeDetails")
-    //console.log(this.selectedContribute1);
     this.selectedContribute1 = new Contribute();
   }
 
   addNewContributeToList(contributeToAdd: Contribute) {
     console.log("addNewContributeToList")
     this.contributes.push(contributeToAdd);
-    //this.selectedContribute1 = null;
   }
 
   saveContributeToList(contributeToSave: Contribute) {
     console.log(JSON.stringify(contributeToSave));
-    console.log("saveContributeToList");
     if (contributeToSave.id == 0) {
       contributeToSave.id = this.contributes.length + 1;
       this.contributes.push(contributeToSave);
@@ -55,10 +53,6 @@ export class ContributeListComponent implements OnInit {
       let index = this.contributes.indexOf(contributeToUpdate);
       this.contributes[index] = contributeToSave;
     }
-    //this.selectedContribute.name="";
-    //this.selectedContribute.description="";
-    //this.selectedContribute.id=0;
-    //this.selectedContribute = null;
   }
 
 
@@ -105,7 +99,7 @@ export class ContributeListComponent implements OnInit {
       });
   }
 
-  constructor(private _contributeService: ContributeService, private _acr: ActivatedRoute) {
+  constructor(private _contributeService: ContributeService, private _acr: ActivatedRoute, public dialog: MatDialog) {
 
   }
 
@@ -114,10 +108,14 @@ export class ContributeListComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  openDialog(): void {
+    this.dialog.open(DeleteContributeModalComponent, {
+      width: '250px',
+    });
+  }
+
   expandPanel(matExpansionPanel: MatExpansionPanel, event: any) {
     event.stopPropagation();
-    console.log(event.target.tagName);
-
     if (!this._isExpansionIndicator(event.target)) {
       matExpansionPanel.open();
     }
@@ -131,6 +129,4 @@ export class ContributeListComponent implements OnInit {
   }
 
 }
-
-
 

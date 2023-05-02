@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, HostListener, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { CoinType, Contribute, ContributeType, MyErrorStateMatcher } from '../contribute.model';
 
@@ -13,6 +13,14 @@ export class ContributeDetailsFormComponent implements OnInit {
   // constructor() { }
 
   ngOnInit(): void {
+    this.innerWidth = window.innerWidth;
+  }
+
+  public innerWidth: any;
+
+  @HostListener('window:resize', ['$event'])
+  onWindowResize() {
+    this.innerWidth = window.innerWidth;
   }
 
   private _isDisable: boolean;
@@ -66,13 +74,7 @@ export class ContributeDetailsFormComponent implements OnInit {
           "gate": new FormControl(this._contribute.gate, Validators.required)
         });
       }
-    }
-    // if (this._isDisable) {
-    //   this.contributeForm.disable()
-    // }
-    // else {
-    //   this.contributeForm.enable()
-    // }
+    }    
   }
 
   getErrorMessage(field: string): string {
@@ -103,15 +105,16 @@ export class ContributeDetailsFormComponent implements OnInit {
   onSaveContribute: EventEmitter<any> = new EventEmitter();
 
   saveNewContribute() {
-    // this.contribute?.name = this.contributeForm.controls["name"].value;
-    // this.contribute?.sum = this.contributeForm.controls["sum"].value;
     if (this.contributeForm.valid) {
       console.log("this.contributeForm.valid");
       this.contribute = this.contributeForm.value;
       this.onSaveContribute.emit(this._contribute);
       this._contribute = null
     } 
-    console.log("saveNewContribute");
+  }
+
+  clearNewContribute() {
+    this._contribute = null
   }
 
   @Output()
