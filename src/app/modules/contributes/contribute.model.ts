@@ -23,10 +23,11 @@ export enum ContributeType {
 }
 
 export enum CoinType {
-    Nis = "Nis",
-    Dollar = "Dollar",
-    Euro = "Euro"
+    Nis = "₪",
+    Dollar = "$",
+    Euro = "€"
 }
+
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
     isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {

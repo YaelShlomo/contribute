@@ -5,10 +5,13 @@
       *ngFor="let contribute of contributes" #matExpansionPanel1 hideToggle>
       <mat-expansion-panel-header class="disabled-pointer">
         <mat-panel-title>
-          {{contribute.id}}
+          יישות {{contribute.id}}
         </mat-panel-title>
-        <mat-panel-description>
-          {{contribute.name}}
+        <mat-panel-description *ngIf="contribute.coinType=='₪'">
+          {{contribute.sum}} {{contribute.coinType}}
+        </mat-panel-description>
+        <mat-panel-description *ngIf="contribute.coinType!=='₪'">
+          {{contribute.coinType}} {{contribute.sum}} 
         </mat-panel-description>
         <mat-icon class="icon" (click)="editDetails(contribute)" class="enabled-pointer">edit</mat-icon>
         <mat-icon class="icon" (click)="deleteContribute(contribute)" class="enabled-pointer">delete_outline</mat-icon>

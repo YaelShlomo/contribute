@@ -8,6 +8,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import {FormsModule} from '@angular/forms';
 import { ContributesModule } from './modules/contributes/contribute.module';
 import { HttpClientModule } from '@angular/common/http';
+import { ContributeService } from './modules/contributes/contribute.service';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,7 @@ import { HttpClientModule } from '@angular/common/http';
     ContributesModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [ContributeService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

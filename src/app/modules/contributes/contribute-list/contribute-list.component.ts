@@ -15,15 +15,7 @@ export class ContributeListComponent implements OnInit {
 
   contributeType = ContributeType;
   coinType = CoinType;
-
-  contributes: Contribute[] =
-    [
-      { "id": 1, "name": "aaaa", "sum": 10, "contributeType": ContributeType.A, "destination": "aa", "conditions": "aaa", "coinType": CoinType.Nis, "gate": 1.1 },
-      { "id": 2, "name": "bbbb", "sum": 20, "contributeType": ContributeType.B, "destination": "bb", "conditions": "bbb", "coinType": CoinType.Dollar, "gate": 2.2 },
-      { "id": 3, "name": "cccc", "sum": 30, "contributeType": ContributeType.C, "destination": "cc", "conditions": "ccc", "coinType": CoinType.Euro, "gate": 3.3 },
-      { "id": 4, "name": "dddd", "sum": 40, "contributeType": ContributeType.A, "destination": "dd", "conditions": "ddd", "coinType": CoinType.Nis, "gate": 4.4 },
-    ];
-
+  contributes: Contribute[];
   selectedContribute1: Contribute;
   selectedContribute2: Contribute | null;
   isDisable: boolean;
@@ -55,22 +47,6 @@ export class ContributeListComponent implements OnInit {
     }
   }
 
-
-  showHelp() {
-    alert("Do you need help?");
-  }
-
-  showAdv() {
-    // alert("adv"); 
-  }
-
-  btnClick(e: any) {
-
-  }
-
-  search(str: string) {
-  }
-
   showDetails(contribute: Contribute) {
     this.selectedContribute2 = contribute;
     this.isDisable = true;
@@ -100,7 +76,9 @@ export class ContributeListComponent implements OnInit {
   }
 
   constructor(private _contributeService: ContributeService, private _acr: ActivatedRoute, public dialog: MatDialog) {
-
+    _contributeService.getContributesFromServer().subscribe(contributesList => {
+      this.contributes = contributesList;
+    })
   }
 
   userId?: number;

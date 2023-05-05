@@ -1,7 +1,7 @@
-<mat-card [ngClass]="{'mat-elevation-z24':contribute.id == 0, 'mat-elevation-z0':contribute.id !==0}"
+<mat-card dir="rtl" [ngClass]="{'mat-elevation-z24':contribute.id == 0, 'mat-elevation-z0':contribute.id !==0}"
   *ngIf="contribute">
   <form [formGroup]="contributeForm">
-    <div class="all" dir="rtl">
+    <div class="all">
       <ng-container *ngIf="contribute.id == 0">
         <mat-icon (click)="clearNewContribute()"> cancel_presentation</mat-icon>
         <p class="title">הוספת דיווח על העמותה</p>
@@ -18,7 +18,7 @@
         </mat-form-field>
         <mat-form-field appearance="outline" fxFlex="25%"
           [ngClass]="{'marginLetf':contribute.id == 0 && this.innerWidth >= 599}">
-          <mat-label>סכום התרומה בש"ח</mat-label>
+          <mat-label>סכום התרומה</mat-label>
           <input matInput formControlName="sum">
           <mat-error *ngIf="contributeForm.controls?.['sum']?.errors">
             {{getErrorMessage("sum")}}
@@ -37,7 +37,7 @@
         </mat-form-field>
       </div>
 
-      <div dir="rtl">
+      <div>
         <mat-form-field class="try" appearance="outline">
           <mat-label>יעוד התרומה</mat-label>
           <input matInput formControlName="destination">
@@ -47,14 +47,14 @@
         </mat-form-field>
       </div>
 
-      <div dir="rtl">
+      <div>
         <mat-form-field class="try" appearance="outline">
           <mat-label>התנאים לתרומה</mat-label>
           <input matInput formControlName="conditions">
         </mat-form-field>
       </div>
 
-      <div dir="rtl" [ngClass]="{'fxLayoutRow':contribute.id == 0, 'fxLayoutCol':contribute.id !== 0}"
+      <div [ngClass]="{'fxLayoutRow':contribute.id == 0, 'fxLayoutCol':contribute.id !== 0}"
         fxLayout.xs="column" fxLayoutGap.xs="0">
         <mat-form-field appearance="outline" fxFlex="25%"
           [ngClass]="{'marginLetf':contribute.id == 0 && this.innerWidth >= 599}">
@@ -78,7 +78,7 @@
       </div>
     </div>
 
-    <div class="example-button-row">
+    <div dir="ltr" >
       <button mat-raised-button color="primary" class="btn btn-primary" (click)="saveNewContribute()"
         *ngIf="!this.isDisable">שמירה</button>
       <button mat-raised-button color="primary" class="btn btn-primary" type="button" (click)="clearContribute()"
