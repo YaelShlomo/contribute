@@ -5,7 +5,7 @@
       *ngFor="let contribute of contributes" #matExpansionPanel1 hideToggle>
       <mat-expansion-panel-header class="disabled-pointer">
         <mat-panel-title>
-          יישות {{contribute.id}}
+          יישות {{contribute.myId}}
         </mat-panel-title>
         <mat-panel-description *ngIf="contribute.coinType=='₪'">
           {{contribute.sum}} {{contribute.coinType}}

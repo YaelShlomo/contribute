@@ -34,7 +34,8 @@ export class ContributeDetailsFormComponent implements OnInit {
     this._isDisable = value;
     if (this._contribute != undefined) {
       this.contributeForm = new FormGroup({
-        "id": new FormControl(this._contribute.id),
+        // "id": new FormControl(this._contribute.id),
+        "myId": new FormControl(this._contribute.myId),
         "name": new FormControl({ value: this._contribute.name, disabled: this._isDisable }, [Validators.required, Validators.minLength(3), Validators.pattern(this.charRegex)]),
         "sum": new FormControl({ value: this._contribute.sum, disabled: this._isDisable }, [Validators.required, Validators.pattern(this.numRegex)]),
         "contributeType": new FormControl({ value: this._contribute.contributeType, disabled: this._isDisable }, Validators.required),
@@ -66,7 +67,8 @@ export class ContributeDetailsFormComponent implements OnInit {
       this._contribute = value;
       if (this._contribute != undefined) {
         this.contributeForm = new FormGroup({
-          "id": new FormControl(this._contribute.id),
+          // "id": new FormControl(this._contribute.id),
+          "myId": new FormControl(this._contribute.myId),
           "name": new FormControl(this._contribute.name, [Validators.required, Validators.minLength(3), Validators.pattern(this.charRegex)]),
           "sum": new FormControl(this._contribute.sum, [Validators.required, Validators.pattern(this.numRegex)]),
           "contributeType": new FormControl(this._contribute.contributeType, Validators.required),
@@ -98,7 +100,8 @@ export class ContributeDetailsFormComponent implements OnInit {
   clearContribute() {
     if (this._contribute)
     this.contributeForm = new FormGroup({
-      "id": new FormControl(this._contribute.id),
+      // "id": new FormControl(this._contribute.id),
+      "myId": new FormControl(this._contribute.myId),
       "name": new FormControl('', [Validators.required, Validators.minLength(3), Validators.pattern(this.charRegex)]),
       "sum": new FormControl('', [Validators.required, Validators.pattern(this.numRegex)]),
       "contributeType": new FormControl('', Validators.required),

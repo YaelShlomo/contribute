@@ -14,34 +14,27 @@ export class ContributeService {
         return this._http.get<Contribute[]>("/api/Contributes/?done=" + done);
     }
 
-    saveContributes(contributesList: Contribute[]): Observable<boolean> {
-        return this._http.post<boolean>("/api/Contributes", contributesList)
+    getContributesFromServerByMyId(myId: Number) {
+        return this._http.get<Contribute[]>("/api/Contributes/?myId=" + myId);
     }
 
-    getValue(): Promise<number> {
-        return new Promise<number>((resolve, reject) => {
-            setTimeout(() => {
-                resolve(1);
-            }, 3000);
-            //reject("no number found");
-        });
+    // saveContributes(contributesList: Contribute[]): Observable<boolean> {
+    //     return this._http.post<boolean>("/api/Contributes", contributesList)
+    // }
+
+    saveContributes(contributeToSave: Contribute): Observable<boolean> {
+        console.log("saveContributes")
+        return this._http.post<boolean>("/api/Contributes", contributeToSave)
     }
 
-    callFunc() {
-        // console.log("before call getValue")
-        var x: number;
-        this.getValue().then((value) => {
-            x = value;
-            // console.log("after get value from getValue function. The value is " + x);
-        }).catch((err) => {
-            x = 0;
-            console.log(err)
-        })
-        // console.log("after call getValue");
+
+    deleteContributesFromServer(myId: Number): Observable<boolean> {
+        console.log("deleteContributesFromServer");
+        console.log(myId);
+        return this._http.delete<boolean>("/api/Contributes/?myId=" + myId);
     }
 
     constructor(private _http:HttpClient) {
-        this.callFunc();
     }
 
 }

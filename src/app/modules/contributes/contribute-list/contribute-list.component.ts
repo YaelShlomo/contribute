@@ -19,10 +19,16 @@ export class ContributeListComponent implements OnInit {
   selectedContribute1: Contribute;
   selectedContribute2: Contribute | null;
   isDisable: boolean;
+  contributesCounter: number = 0;
 
   deleteContribute(contribute: Contribute) {
     let indexToDelete = this.contributes.indexOf(contribute);
     this.contributes.splice(indexToDelete, 1);
+    let myId = contribute.myId;
+    console.log(myId);
+    this._contributeService.deleteContributesFromServer(myId).subscribe(data=>{
+      
+    });
   }
 
   showNewContributeDetails() {
@@ -36,12 +42,19 @@ export class ContributeListComponent implements OnInit {
 
   saveContributeToList(contributeToSave: Contribute) {
     console.log(JSON.stringify(contributeToSave));
-    if (contributeToSave.id == 0) {
-      contributeToSave.id = this.contributes.length + 1;
+    if (contributeToSave.myId == 0) {
+      this.contributesCounter += 1;
+      contributeToSave.myId = this.contributesCounter;
       this.contributes.push(contributeToSave);
+      this._contributeService.saveContributes(contributeToSave).subscribe(data=>{
+        alert("jj")
+      })
+
+      // this._contributeService.saveContributes(this.contributes);
+
     }
     else {
-      let contributeToUpdate = this.contributes.filter(x => x.id == contributeToSave.id)[0];
+      let contributeToUpdate = this.contributes.filter(x => x.myId == contributeToSave.myId)[0];
       let index = this.contributes.indexOf(contributeToUpdate);
       this.contributes[index] = contributeToSave;
     }
@@ -63,17 +76,17 @@ export class ContributeListComponent implements OnInit {
     })
   }
 
-  saveContributeToServer() {
-    this._contributeService.saveContributes(this.contributes).subscribe(data => {
-      if (data)
-        alert("Contribute saved successfully");
-      else
-        alert("Contribute failed");
-    },
-      err => {
-        alert(err);
-      });
-  }
+  // saveContributeToServer() {
+  //   this._contributeService.saveContributes(this.contributes).subscribe(data => {
+  //     if (data)
+  //       alert("Contribute saved successfully");
+  //     else
+  //       alert("Contribute failed");
+  //   },
+  //     err => {
+  //       alert(err);
+  //     });
+  // }
 
   constructor(private _contributeService: ContributeService, private _acr: ActivatedRoute, public dialog: MatDialog) {
     _contributeService.getContributesFromServer().subscribe(contributesList => {

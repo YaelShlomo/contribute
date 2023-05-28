@@ -2,7 +2,8 @@
 import {FormControl, FormGroupDirective, NgForm} from '@angular/forms';
 import {ErrorStateMatcher} from '@angular/material/core';
 export class Contribute {
-    id: Number;
+    // id: String;
+    myId: Number;
     name: string;
     sum: Number;
     contributeType: ContributeType;
@@ -12,7 +13,7 @@ export class Contribute {
     gate: Number;
     
     constructor() {
-        this.id = 0;
+        this.myId = 0;
     }
 }
 
