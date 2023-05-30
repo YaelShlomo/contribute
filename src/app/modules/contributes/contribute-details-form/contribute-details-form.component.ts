@@ -1,6 +1,6 @@
 import { Component, EventEmitter, HostListener, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { CoinType, Contribute, ContributeType, MyErrorStateMatcher } from '../contribute.model';
+import { CoinType, Contribute, ContributeType } from '../contribute.model';
 
 @Component({
   selector: 'app-contribute-details-form',
@@ -9,8 +9,6 @@ import { CoinType, Contribute, ContributeType, MyErrorStateMatcher } from '../co
 })
 
 export class ContributeDetailsFormComponent implements OnInit {
-
-  // constructor() { }
 
   ngOnInit(): void {
     this.innerWidth = window.innerWidth;
@@ -34,14 +32,13 @@ export class ContributeDetailsFormComponent implements OnInit {
     this._isDisable = value;
     if (this._contribute != undefined) {
       this.contributeForm = new FormGroup({
-        // "id": new FormControl(this._contribute.id),
         "myId": new FormControl(this._contribute.myId),
         "name": new FormControl({ value: this._contribute.name, disabled: this._isDisable }, [Validators.required, Validators.minLength(3), Validators.pattern(this.charRegex)]),
         "sum": new FormControl({ value: this._contribute.sum, disabled: this._isDisable }, [Validators.required, Validators.pattern(this.numRegex)]),
-        "contributeType": new FormControl({ value: this._contribute.contributeType, disabled: this._isDisable }, Validators.required),
+        "contributeType": new FormControl({ value: this.getKeyByValue(ContributeType,this._contribute.contributeType), disabled: this._isDisable }, Validators.required),
         "destination": new FormControl({ value: this._contribute.destination, disabled: this._isDisable }, Validators.required),
         "conditions": new FormControl({ value: this._contribute.conditions, disabled: this._isDisable }),
-        "coinType": new FormControl({ value: this._contribute.coinType, disabled: this._isDisable }, Validators.required),
+        "coinType": new FormControl({ value: this.getKeyByValue(CoinType, this._contribute.coinType), disabled: this._isDisable }, Validators.required),
         "gate": new FormControl({ value: this._contribute.gate, disabled: this._isDisable }, Validators.required)
       });
     }
@@ -67,14 +64,13 @@ export class ContributeDetailsFormComponent implements OnInit {
       this._contribute = value;
       if (this._contribute != undefined) {
         this.contributeForm = new FormGroup({
-          // "id": new FormControl(this._contribute.id),
           "myId": new FormControl(this._contribute.myId),
           "name": new FormControl(this._contribute.name, [Validators.required, Validators.minLength(3), Validators.pattern(this.charRegex)]),
           "sum": new FormControl(this._contribute.sum, [Validators.required, Validators.pattern(this.numRegex)]),
-          "contributeType": new FormControl(this._contribute.contributeType, Validators.required),
+          "contributeType": new FormControl(this.getKeyByValue(ContributeType, this._contribute.contributeType), Validators.required),
           "destination": new FormControl(this._contribute.destination, Validators.required),
           "conditions": new FormControl(this._contribute.conditions),
-          "coinType": new FormControl(this._contribute.coinType, Validators.required),
+          "coinType": new FormControl(this.getKeyByValue(CoinType, this._contribute.coinType), Validators.required),
           "gate": new FormControl(this._contribute.gate, Validators.required)
         });
       }
@@ -100,7 +96,6 @@ export class ContributeDetailsFormComponent implements OnInit {
   clearContribute() {
     if (this._contribute)
     this.contributeForm = new FormGroup({
-      // "id": new FormControl(this._contribute.id),
       "myId": new FormControl(this._contribute.myId),
       "name": new FormControl('', [Validators.required, Validators.minLength(3), Validators.pattern(this.charRegex)]),
       "sum": new FormControl('', [Validators.required, Validators.pattern(this.numRegex)]),
@@ -140,6 +135,15 @@ export class ContributeDetailsFormComponent implements OnInit {
     this.onFirstFocus.emit()
   }
 
-  contributeTypes = Object.keys(ContributeType);
-  coinTypes = Object.keys(CoinType);
+  getKeyByValue(enumObj: any, value:any) {
+    for (const key in enumObj) {
+      if (enumObj[key] === value) {
+        return key;
+      }
+    }
+    return null; // Value not found in the enum
+  }
+
+  contributeTypes = Object.keys(ContributeType).filter(key => isNaN(Number(key))==true);
+  coinTypes = Object.keys(CoinType).filter(key => isNaN(Number(key))==true);
 }

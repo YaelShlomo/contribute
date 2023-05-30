@@ -18,20 +18,15 @@ export class ContributeService {
         return this._http.get<Contribute[]>("/api/Contributes/?myId=" + myId);
     }
 
-    // saveContributes(contributesList: Contribute[]): Observable<boolean> {
-    //     return this._http.post<boolean>("/api/Contributes", contributesList)
-    // }
-
-    saveContributes(contributeToSave: Contribute): Observable<boolean> {
-        console.log("saveContributes")
-        return this._http.post<boolean>("/api/Contributes", contributeToSave)
+    saveContribute(contributeToSave: Contribute): Observable<boolean> {
+        return this._http.post<boolean>("/api/Contributes", contributeToSave); 
+    }
+    updateContribute(contributeToSave: Contribute): Observable<boolean> {
+        return this._http.put<boolean>("/api/Contributes/"+contributeToSave.myId, contributeToSave); 
     }
 
-
     deleteContributesFromServer(myId: Number): Observable<boolean> {
-        console.log("deleteContributesFromServer");
-        console.log(myId);
-        return this._http.delete<boolean>("/api/Contributes/?myId=" + myId);
+        return this._http.delete<boolean>("/api/Contributes/"+myId);
     }
 
     constructor(private _http:HttpClient) {

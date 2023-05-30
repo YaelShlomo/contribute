@@ -18,16 +18,23 @@ export class Contribute {
 }
 
 export enum ContributeType {
-    A = "A",
-    B = "B",
-    C = "C"
+    A = 1,
+    B = 2,
+    C = 3
 }
 
 export enum CoinType {
-    Nis = "₪",
-    Dollar = "$",
-    Euro = "€"
+    "₪" = 1,
+    "$" = 2,
+    "€" = 3
 }
+
+
+// export enum CoinType {
+//     Nis = "₪",
+//     Dollar = "$",
+//     Euro = "€"
+// }
 
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {

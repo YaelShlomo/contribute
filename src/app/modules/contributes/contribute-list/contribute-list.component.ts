@@ -19,7 +19,7 @@ export class ContributeListComponent implements OnInit {
   selectedContribute1: Contribute;
   selectedContribute2: Contribute | null;
   isDisable: boolean;
-  contributesCounter: number = 0;
+  contributesCounter: number;
 
   deleteContribute(contribute: Contribute) {
     let indexToDelete = this.contributes.indexOf(contribute);
@@ -27,7 +27,7 @@ export class ContributeListComponent implements OnInit {
     let myId = contribute.myId;
     console.log(myId);
     this._contributeService.deleteContributesFromServer(myId).subscribe(data=>{
-      
+      console.log(data);
     });
   }
 
@@ -42,21 +42,29 @@ export class ContributeListComponent implements OnInit {
 
   saveContributeToList(contributeToSave: Contribute) {
     console.log(JSON.stringify(contributeToSave));
+    let contributeToSaveInCorrectFormat = new Contribute();
+    contributeToSaveInCorrectFormat.myId = contributeToSave.myId;
+    contributeToSaveInCorrectFormat.name = contributeToSave.name;
+    contributeToSaveInCorrectFormat.sum = Number(contributeToSave.sum);
+    contributeToSaveInCorrectFormat.contributeType = Number(ContributeType[contributeToSave.contributeType])
+    contributeToSaveInCorrectFormat.destination = contributeToSave.destination;
+    contributeToSaveInCorrectFormat.conditions = contributeToSave.conditions;
+    contributeToSaveInCorrectFormat.coinType = Number(CoinType[contributeToSave.coinType]);
+    contributeToSaveInCorrectFormat.gate = Number(contributeToSave.gate);
     if (contributeToSave.myId == 0) {
       this.contributesCounter += 1;
       contributeToSave.myId = this.contributesCounter;
+      contributeToSaveInCorrectFormat.myId = contributeToSave.myId;
       this.contributes.push(contributeToSave);
-      this._contributeService.saveContributes(contributeToSave).subscribe(data=>{
-        alert("jj")
+      this._contributeService.saveContribute(contributeToSaveInCorrectFormat).subscribe(data=>{
       })
-
-      // this._contributeService.saveContributes(this.contributes);
-
     }
     else {
       let contributeToUpdate = this.contributes.filter(x => x.myId == contributeToSave.myId)[0];
       let index = this.contributes.indexOf(contributeToUpdate);
       this.contributes[index] = contributeToSave;
+      this._contributeService.updateContribute(contributeToSaveInCorrectFormat).subscribe(data=>{
+      })
     }
   }
 
@@ -76,23 +84,13 @@ export class ContributeListComponent implements OnInit {
     })
   }
 
-  // saveContributeToServer() {
-  //   this._contributeService.saveContributes(this.contributes).subscribe(data => {
-  //     if (data)
-  //       alert("Contribute saved successfully");
-  //     else
-  //       alert("Contribute failed");
-  //   },
-  //     err => {
-  //       alert(err);
-  //     });
-  // }
-
   constructor(private _contributeService: ContributeService, private _acr: ActivatedRoute, public dialog: MatDialog) {
     _contributeService.getContributesFromServer().subscribe(contributesList => {
       this.contributes = contributesList;
+      this.contributesCounter = this.contributes.length;
+      console.log(contributesList);
     })
-  }
+ }
 
   userId?: number;
 
@@ -117,6 +115,15 @@ export class ContributeListComponent implements OnInit {
     return (
       target.classList && target.classList.contains(expansionIndicatorClass)
     );
+  }
+
+  getKeyByValue(enumObj: any, value:any) {
+    for (const key in enumObj) {
+      if (enumObj[key] === value) {
+        return key;
+      }
+    }
+    return null; // Value not found in the enum
   }
 
 }

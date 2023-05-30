@@ -7,10 +7,10 @@
         <mat-panel-title>
           יישות {{contribute.myId}}
         </mat-panel-title>
-        <mat-panel-description *ngIf="contribute.coinType=='₪'">
-          {{contribute.sum}} {{contribute.coinType}}
+        <mat-panel-description *ngIf="contribute.coinType==1">
+          <!-- {{contribute.sum}} {{this.getKeyByValue(coinType, contribute.coinType)}} -->
         </mat-panel-description>
-        <mat-panel-description *ngIf="contribute.coinType!=='₪'">
+        <mat-panel-description *ngIf="contribute.coinType!==1">
           {{contribute.coinType}} {{contribute.sum}} 
         </mat-panel-description>
         <mat-icon class="icon" (click)="editDetails(contribute)" class="enabled-pointer">edit</mat-icon>
