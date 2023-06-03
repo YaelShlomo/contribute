@@ -51,6 +51,9 @@ export class ContributeListComponent implements OnInit {
     contributeToSaveInCorrectFormat.conditions = contributeToSave.conditions;
     contributeToSaveInCorrectFormat.coinType = Number(CoinType[contributeToSave.coinType]);
     contributeToSaveInCorrectFormat.gate = Number(contributeToSave.gate);
+    console.log("contributeToSaveInCorrectFormat")
+    console.log(contributeToSaveInCorrectFormat)
+
     if (contributeToSave.myId == 0) {
       this.contributesCounter += 1;
       contributeToSave.myId = this.contributesCounter;
@@ -85,10 +88,9 @@ export class ContributeListComponent implements OnInit {
   }
 
   constructor(private _contributeService: ContributeService, private _acr: ActivatedRoute, public dialog: MatDialog) {
-    _contributeService.getContributesFromServer().subscribe(contributesList => {
-      this.contributes = contributesList;
-      this.contributesCounter = this.contributes.length;
-      console.log(contributesList);
+        _contributeService.getContributesFromServer().subscribe(contributesList => {
+          this.contributes = contributesList;
+          this.contributesCounter = this.contributes.length;
     })
  }
 
