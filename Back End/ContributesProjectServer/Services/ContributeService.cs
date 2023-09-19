@@ -22,11 +22,6 @@ namespace ContributesProjectServer.Services
             return _contributes.Find(Contribute => true).ToList();
         }
 
-        //public Contribute Get(string id)
-        //{
-        //    return _contributes.Find(contribute => contribute.Id == id).FirstOrDefault();
-        //}
-
         public Contribute Get(int myId)
         {
             return _contributes.Find(contribute => contribute.MyId == myId).FirstOrDefault();   
