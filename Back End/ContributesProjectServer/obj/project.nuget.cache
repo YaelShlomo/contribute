@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "XvEUYlcj5rQ0I7gMfWA/p6G80NEcs4kwwzNWb46QCUs+qSSOQ2AHH7ADK6kXB5/2nsC9syxVE9nPwuoeQVzy8w==",
+  "dgSpecHash": "YJhHpC4RBBmpOqtH7cMLY3MJ6RFtN570RqlBHi4h62KuxP/g7xghXWTE7AE4U7HAbic/bgJL4xxeP8T8v3dpag==",
   "success": true,
-  "projectFilePath": "C:\\Users\\This_User\\Desktop\\ContributesServer1\\ContributesProjectServer\\ContributesProjectServer\\ContributesProjectServer.csproj",
+  "projectFilePath": "C:\\Users\\This_User\\Desktop\\contributeTest\\Back End\\ContributesProjectServer\\ContributesProjectServer.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\This_User\\.nuget\\packages\\awssdk.core\\3.7.100.14\\awssdk.core.3.7.100.14.nupkg.sha512",
     "C:\\Users\\This_User\\.nuget\\packages\\awssdk.securitytoken\\3.7.100.14\\awssdk.securitytoken.3.7.100.14.nupkg.sha512",

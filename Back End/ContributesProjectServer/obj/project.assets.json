@@ -1273,11 +1273,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\This_User\\Desktop\\ContributesServer1\\ContributesProjectServer\\ContributesProjectServer\\ContributesProjectServer.csproj",
+      "projectUniqueName": "C:\\Users\\This_User\\Desktop\\contributeTest\\Back End\\ContributesProjectServer\\ContributesProjectServer.csproj",
       "projectName": "ContributesProjectServer",
-      "projectPath": "C:\\Users\\This_User\\Desktop\\ContributesServer1\\ContributesProjectServer\\ContributesProjectServer\\ContributesProjectServer.csproj",
+      "projectPath": "C:\\Users\\This_User\\Desktop\\contributeTest\\Back End\\ContributesProjectServer\\ContributesProjectServer.csproj",
       "packagesPath": "C:\\Users\\This_User\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\This_User\\Desktop\\ContributesServer1\\ContributesProjectServer\\ContributesProjectServer\\obj\\",
+      "outputPath": "C:\\Users\\This_User\\Desktop\\contributeTest\\Back End\\ContributesProjectServer\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\ProgramData\\Xamarin\\NuGet\\",
