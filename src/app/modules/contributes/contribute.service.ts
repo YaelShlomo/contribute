@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
-import { CoinType, Contribute, ContributeType } from "./contribute.model";
+import { Contribute, EmailModel } from "./contribute.model";
 
 @Injectable()
 export class ContributeService {
@@ -29,7 +29,12 @@ export class ContributeService {
         return this._http.delete<boolean>("/api/Contributes/"+myId);
     }
 
+    sendEmail(email: EmailModel) :Observable<boolean> {
+        console.log("sendEmail")
+        return this._http.post<boolean>('/api/Contributes/send', email);
+      }
+
     constructor(private _http:HttpClient) {
     }
-
 }
+

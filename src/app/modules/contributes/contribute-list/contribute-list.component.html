@@ -1,17 +1,16 @@
 
 <div class="form" dir="rtl" *ngIf="contributes else noContribute">
-  <mat-accordion>
-    <mat-expansion-panel [expanded]=false
+  <mat-accordion class="accordion">
+        <mat-expansion-panel [expanded]=false
       *ngFor="let contribute of contributes" #matExpansionPanel1 hideToggle>
       <mat-expansion-panel-header class="disabled-pointer">
         <mat-panel-title>
-          יישות {{contribute.myId}}
+         {{contribute.name}}
         </mat-panel-title>
-        <mat-panel-description *ngIf="contribute.coinType==1">
-          <!-- {{contribute.sum}} {{contribute.coinType}} -->
+        <mat-panel-description *ngIf="this.getKeyByValue(coinType, contribute.coinType)=='₪'">
           {{contribute.sum}} {{this.getKeyByValue(coinType, contribute.coinType)}}
         </mat-panel-description>
-        <mat-panel-description *ngIf="contribute.coinType!==1">
+        <mat-panel-description *ngIf="this.getKeyByValue(coinType, contribute.coinType)!=='₪'">
           {{this.getKeyByValue(coinType, contribute.coinType)}} {{contribute.sum}} 
         </mat-panel-description>
         <mat-icon class="icon" (click)="editDetails(contribute)" class="enabled-pointer">edit</mat-icon>

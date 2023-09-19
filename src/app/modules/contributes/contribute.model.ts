@@ -29,13 +29,11 @@ export enum CoinType {
     "€" = 3
 }
 
-
-// export enum CoinType {
-//     Nis = "₪",
-//     Dollar = "$",
-//     Euro = "€"
-// }
-
+export class EmailModel {
+    recipient: string;
+    subject: string;
+    body: string;
+}
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
     isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {

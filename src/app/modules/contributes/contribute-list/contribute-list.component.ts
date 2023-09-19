@@ -2,9 +2,10 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatExpansionPanel } from '@angular/material/expansion';
 import { ActivatedRoute } from '@angular/router';
-import { CoinType, Contribute, ContributeType } from '../contribute.model';
+import { CoinType, Contribute, ContributeType, EmailModel } from '../contribute.model';
 import { ContributeService } from '../contribute.service';
 import { DeleteContributeModalComponent } from '../delete-contribute-modal/delete-contribute-modal.component';
+
 @Component({
   selector: 'app-contribute-list',
   templateUrl: './contribute-list.component.html',
@@ -47,12 +48,11 @@ export class ContributeListComponent implements OnInit {
     contributeToSaveInCorrectFormat.name = contributeToSave.name;
     contributeToSaveInCorrectFormat.sum = Number(contributeToSave.sum);
     contributeToSaveInCorrectFormat.contributeType = Number(ContributeType[contributeToSave.contributeType])
+    contributeToSave.contributeType = Number(ContributeType[contributeToSave.contributeType])
     contributeToSaveInCorrectFormat.destination = contributeToSave.destination;
     contributeToSaveInCorrectFormat.conditions = contributeToSave.conditions;
     contributeToSaveInCorrectFormat.coinType = Number(CoinType[contributeToSave.coinType]);
     contributeToSaveInCorrectFormat.gate = Number(contributeToSave.gate);
-    console.log("contributeToSaveInCorrectFormat")
-    console.log(contributeToSaveInCorrectFormat)
 
     if (contributeToSave.myId == 0) {
       this.contributesCounter += 1;
@@ -69,6 +69,12 @@ export class ContributeListComponent implements OnInit {
       this._contributeService.updateContribute(contributeToSaveInCorrectFormat).subscribe(data=>{
       })
     }
+    let emailDetails = new EmailModel()
+    emailDetails.recipient = "yaelfrank100@gmail.com";
+    emailDetails.body = "Email Body";
+    emailDetails.subject = "A Contribution in excess of 10000 was received"
+    console.log(emailDetails)
+    this._contributeService.sendEmail(emailDetails).subscribe( data => {})
   }
 
   showDetails(contribute: Contribute) {
@@ -122,7 +128,12 @@ export class ContributeListComponent implements OnInit {
   getKeyByValue(enumObj: any, value:any) {
     for (const key in enumObj) {
       if (enumObj[key] === value) {
-        return key;
+        if (typeof enumObj[key] === "number") {
+          return key;
+        }
+        else {
+          return enumObj[key];
+        }
       }
     }
     return null; // Value not found in the enum
